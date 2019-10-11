@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Marguonana/PictionaryBack#readme",
   "dependencies": {
+    "babel": "^6.23.0",
     "express": "^4.17.1"
   }
 }
