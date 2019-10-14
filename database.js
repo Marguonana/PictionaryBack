@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb://localhost:27017/dbCapThira';
+const mongoDB = 'mongodb+srv://AlROM:Pictionary@pictionary-gqsnd.mongodb.net/test?retryWrites=true&w=majority';
+//mongodb+srv://AlROM:<password>@pictionary-gqsnd.mongodb.net/test?retryWrites=true&w=majority
 
 
 module.exports={

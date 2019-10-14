@@ -19,3 +19,9 @@ app.listen(port,function (req, res) {
 })
 module.exports= app
 
+//OBJECTIF
+//Créer une BDD via atlas et l'intégrer au back
+//
+//
+//
+//
