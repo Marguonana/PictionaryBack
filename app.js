@@ -1,27 +1,22 @@
-const express = require('express');
+const mongoose = require("mongoose");
+const express = require("express");
+const { createServer } = require("http");
 const app = express();
 const port = 3000;
-const routesUsers = require('./src/compUsers/routesUsers');
-const routesImages = require('./src/compImages/routesImages');
-const dataBase = require('./dataBase');
 
+mongoose
+  .connect(
+    "mongodb+srv://alex:alex@cluster0-gqsnd.mongodb.net/test?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true
+    }
+  )
+  .then(() => console.log("connecté"))
+  .catch(err =>
+    console.log(
+      err
+    )
+  );
 
-// Images call-----------------------------------------------------------
-app.use('/images',routesImages)
-
-// Users call------------------------------------------------------------
-app.use('/users', routesUsers);
-
-//Connection à la DB, Lancement du serveur-------------------------------
-dataBase.Connection()
-app.listen(port,function (req, res) {
-  console.log('Express server listening on port: ' + port);
-})
-module.exports= app
-
-//OBJECTIF
-//Créer une BDD via atlas et l'intégrer au back
-//
-//
-//
-//
+const server = createServer(app);
+server.listen(port, () => console.log("serveur up port 3000"));
