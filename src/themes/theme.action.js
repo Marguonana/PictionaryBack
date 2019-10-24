@@ -14,7 +14,7 @@ module.exports={
         if (!libelleTheme){
            return res.status(400);
         }else{
-            themeProcess.getThemeProcess()
+            themeProcess.getThemeProcess('theme');
         }
     }
 }

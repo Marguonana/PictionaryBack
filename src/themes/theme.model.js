@@ -8,17 +8,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = require('mongodb').ObjectID;
 
-var Theme = new Schema (
+var ThemeSchema = new Schema (
     {
-        theme: {
-            transport:{type:Array},
-            fruit: {type: Array},
-            jeu: {type: Array},
-            animaux: {type: Array},
-            plante: {type:Array},
-            ville: {type:Array}
-        }
+        section: {type: String, required: true},
+        liste: []
     }
 );
 
-module.exports = mongoose.model('Theme', Theme);
+ThemeSchema.set('collection', 'Themes');
+
+module.exports = mongoose.model('Theme', ThemeSchema);
