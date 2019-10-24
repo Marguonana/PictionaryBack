@@ -9,6 +9,11 @@ const themeProcessFile = require('./theme.process');
 
 module.exports={
 
+    /**
+     * | route: /theme/words
+     * | res: retourne la liste des mots dans data
+     * | req: req.param.theme contient le theme choisi
+     */
     getWords:(req,res)=>{
         let targetTheme= req.params.theme;
         if (!targetTheme){

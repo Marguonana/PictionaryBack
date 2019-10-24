@@ -19,10 +19,8 @@ module.exports={
                 if(err){
                     reject(err);
                 }else{
-                    // console.log(res);
                     collection.forEach((colElem)=>{
-                        if (colElem.secteur === theme){
-                            console.log(colElem.liste);
+                        if (colElem.section === theme){
                             resolve(JSON.stringify(colElem.liste));
                         }
                     })

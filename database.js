@@ -11,10 +11,11 @@ module.exports={
         db.on('error',console.error.bind(console, 'Login error to the database'));  
         db.once('open', function(){
             console.log("Successful connection to the database !");
-            var req =  {'params': {
-                'theme' : 'Transport'
-            }}
-            lnk.getWords(req);
+            // --------MOCK FRONT
+            // var req =  {'params': {
+            //     'theme' : 'Transport'
+            // }}
+            // lnk.getWords(req);
         })
     }
 }
