@@ -1,20 +1,22 @@
 /**
  * ------------------------------------------------
- * | Action : Endroit où seront receptionné les datas venant du front
+ * | ACTION : Endroit où seront receptionné les datas venant du front
  * | Les test de base se feront ici
  * ------------------------------------------------
  */
 // const colImages  = require('./modelsImages');
-const themeProcess = require('./theme.process');
+const themeProcessFile = require('./theme.process');
 
 module.exports={
 
-    getTheme:(req,res)=>{
-        let libelleTheme= req.params.theme;
-        if (!libelleTheme){
+    getWords:(req,res)=>{
+        let targetTheme= req.params.theme;
+        if (!targetTheme){
            return res.status(400);
         }else{
-            themeProcess.getThemeProcess('theme');
+            themeProcessFile.themeProcess(targetTheme)
+            .then((words)=> {res.status(200).send({data : words})})
+            .catch((err)=>{res.status(500).send({msg:'Error on db research',details : err})})
         }
     }
 }

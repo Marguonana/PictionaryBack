@@ -1,0 +1,3 @@
+# Route
+
+/theme/words : GET

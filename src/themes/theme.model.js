@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------
- * | Fichier contenant le model de notre base de donnée 
- * | Si un nouveau theme apparait, cette page devra être modifié
+ * | MODEL : Fichier contenant le model de notre base de donnée 
+ * | 
  * -----------------------------------------------
  */
 const mongoose = require('mongoose');

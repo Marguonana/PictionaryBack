@@ -12,9 +12,9 @@ module.exports={
         db.once('open', function(){
             console.log("Successful connection to the database !");
             var req =  {'params': {
-                'theme' : 'plante'
+                'theme' : 'Transport'
             }}
-            lnk.getTheme(req);
+            lnk.getWords(req);
         })
     }
 }
