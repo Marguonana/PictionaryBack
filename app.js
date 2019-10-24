@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const routesUsers = require('./src/compUsers/routesUsers');
-const routesImages = require('./src/compImages/routesImages');
+// const routesUsers = require('./src/compUsers/routesUsers');
+const routeTheme = require('./src/themes/theme.route');
 const dataBase = require('./dataBase');
 
 
 // Images call-----------------------------------------------------------
-app.use('/images',routesImages)
+app.use('/theme',routeTheme)
 
 // Users call------------------------------------------------------------
-app.use('/users', routesUsers);
+//app.use('/users', routesUsers);
 
 //Connection à la DB, Lancement du serveur-------------------------------
 dataBase.Connection()
