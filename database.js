@@ -4,15 +4,15 @@ const lnk = require('./src/themes/theme.action')
 
 module.exports={
     Connection:()=>{
-        mongoose.connect(mongoDB,{useUnifiedTopology:true});
+        mongoose.connect(mongoDB,{useUnifiedTopology:true, useNewUrlParser:true});
         mongoose.Promise = global.Promise;
         const db = mongoose.connection;
     
-        db.on('error',console.error.bind(console, 'Login error to the database'));  
+        db.on('error',console.error.bind(console, 'Unable to connect to the mongodb instance.'));  
         db.once('open', function(){
             console.log("Successful connection to the database !");
             // --------MOCK FRONT
-            // var req =  {'params': {
+            // var req =  {'query': {
             //     'theme' : 'Transport'
             // }}
             // lnk.getWords(req);

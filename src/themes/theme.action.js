@@ -15,7 +15,7 @@ module.exports={
      * | req: req.param.theme contient le theme choisi
      */
     getWords:(req,res)=>{
-        let targetTheme= req.params.theme;
+        let targetTheme= req.query.theme;
         if (!targetTheme){
            return res.status(400);
         }else{

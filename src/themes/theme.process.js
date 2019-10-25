@@ -17,10 +17,13 @@ module.exports={
         return new Promise((resolve,reject)=>{
             colTheme.find({}, (err, collection)=> {
                 if(err){
+                    console.log(err);
                     reject(err);
                 }else{
                     collection.forEach((colElem)=>{
-                        if (colElem.section === theme){
+                        if (!colElem) reject('No data found');
+                        if (colElem.section.toLowerCase() === theme.toLowerCase()){
+                            console.log('GET WORDS: ',colElem.liste);
                             resolve(JSON.stringify(colElem.liste));
                         }
                     })
