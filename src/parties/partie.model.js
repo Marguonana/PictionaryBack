@@ -10,7 +10,8 @@ const Schema = mongoose.Schema;
 var PartieSchema = new Schema({
   section: { type: String, required: true },
   listeJoueurs: Array,
-  etatCanvas: Object
+  etatCanvas: Object,
+  motATrouver: String
 });
 
 PartieSchema.set("collection", "Parties");

@@ -12,6 +12,7 @@ mongoose.Promise=global.Promise
 
 module.exports={
 
+    
     partieProcess:(partie)=>{
         return new Promise((resolve,reject)=>{
             colPartie.find({}, (err, collection)=> {
@@ -21,13 +22,19 @@ module.exports={
                 }else{
                     collection.forEach((colElem)=>{
                         if (!colElem) reject('No data found');
-                        if (colElem.section.toLowerCase() === partie.toLowerCase()){
-                            console.log('GET parties: ',colElem.liste);
+                        if (colElem.section.toUpperCase() === partie.toUpperCase()){
+                            console.log('GET parties: ', colElem.liste);
                             resolve(JSON.stringify(colElem.liste));
                         }
                     })
                 }
             });
+        })
+    },
+    updatePartie: (joueur)=>{
+        return new Promise((resolve, reject)=>{
+            colPartie.listeJoueurs.push({})
+            colPartie.update({})
         })
     }
 }

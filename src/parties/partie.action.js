@@ -19,9 +19,21 @@ module.exports={
         if (!targetPartie){
            return res.status(400);
         }else{
-            partieProcessFile.themeProcess(targetPartie)
+            partieProcessFile.partieProcess(targetPartie)
             .then((parties)=> {res.status(200).send({data : parties})})
             .catch((err)=>{res.status(500).send({msg:'Error on db research',details : err})})
         }
+    },
+    joinAction:(req, res)=>{
+        if(!req.query.id || !req.query.pseudo || !req.query.theme){
+            return res.status(400);
+        }else{
+            let infosJoueur = {id : req.query.id, pseudo : req.query.pseudo, score : req.query.score, theme : req.query.theme};
+            partieProcessFile.updatePartie(infosJoueur)
+            .then((infosJoueur)=>{res.status(200).send({data : "Le joueur "+infosJoueur.pseudo+ " a été ajouté à la partie "+infosJoueur.theme})})
+            .catch((err)=>{res.status(500).send({msg:'Error while adding',details : err})});
+        }
     }
+
+
 }
