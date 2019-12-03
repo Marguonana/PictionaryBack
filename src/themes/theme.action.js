@@ -19,6 +19,7 @@ module.exports={
         if (!targetTheme){
            return res.status(400);
         }else{
+            res.type('json');
             themeProcessFile.themeProcess(targetTheme)
             .then((words)=> {res.status(200).send({data : words})})
             .catch((err)=>{res.status(500).send({msg:'Error on db research',details : err})})
