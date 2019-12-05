@@ -44,12 +44,10 @@ module.exports={
         .catch((err) => {res.status(500).send({error: 'Aucun canvas trouvé', details: err})})
     },
     postCanvas: (req,res) => {
-        let targetCanvas = req.query.canvas;
-        let targetTheme = req.query.theme;
-        if (!targetCanvas){
+        if (!req.body.canvas || !req.body.theme){
             res.status(400).send({error : "Requête null" })
         }
-        partieProcessFile.postCanvasProcess(targetCanvas, targetTheme)
+        partieProcessFile.postCanvasProcess(req.body.theme, req.body.canvas)
         .then(() => {res.status(200)})
         .catch((err) => {res.status(500).send({error: 'Echec de la sauvegarde', details: err})})
     }

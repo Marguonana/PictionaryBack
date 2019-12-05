@@ -15,6 +15,15 @@ app.use(cors({
 app.use('/theme',routeTheme)
 app.use('/partie',routePartie)
 
+/**
+ * Toutes les autres routes tomberont ici :)
+ */
+app.use((req,res,next)=> {
+  const err = new Error("Not Implemented");
+  err.status = 501;
+  next(err);
+});
+
 // Users call------------------------------------------------------------
 //app.use('/users', routesUsers);
 

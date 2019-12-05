@@ -37,10 +37,15 @@ module.exports={
             colPartie.update({})
         })
     },
-    postCanvasProcess: (canvas,theme) => {
+    postCanvasProcess: (theme,canvas) => {
+        console.log(theme)
         return new Promise((resolve,reject)=> {
-            console.log(canvas);
-            resolve();
+            colPartie.findOne({ section: theme }, function (err, doc){
+                console.log(doc)
+                doc.canvas = canvas;
+                doc.save();
+                resolve();
+              });
         })
     }
 }

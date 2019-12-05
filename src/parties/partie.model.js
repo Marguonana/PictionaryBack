@@ -1,7 +1,6 @@
 /**
  * ----------------------------------------------
- * | MODEL : Fichier contenant le model de la collection
- * | Parties de notre base de donnée
+ * | MODEL : Fichier contenant le model de notre base de donnée
  * |
  * -----------------------------------------------
  */
@@ -9,11 +8,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var PartieSchema = new Schema({
-  section: { type: String, required: true, uppercase: true },
+  section: { type: String, required: true },
   listeJoueurs: Array,
-  canvas: String,
-  motATrouver: String,
-  numPartie: Number
+  etatCanvas: Object,
+  motATrouver: String
 });
 
 PartieSchema.set("collection", "Parties");

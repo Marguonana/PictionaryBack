@@ -7,7 +7,7 @@ router.use(bodyParser.urlencoded({limit: '100mb' , extended: true }));
 router.use(bodyParser.json({limit: '100mb' , extended: true }));
 //------------------------------------------------------
 
-router.get('/parties',partieActionFile.getParties);
+router.get('/',partieActionFile.getParties);
 //router.get('/canvas', partieActionFile.getCanvas);
 
 //router.put('/canvas/:id',partieActionFile.putCanvas);
