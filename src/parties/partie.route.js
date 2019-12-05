@@ -8,13 +8,11 @@ router.use(bodyParser.json({limit: '100mb' , extended: true }));
 //------------------------------------------------------
 
 router.get('/parties',partieActionFile.getParties);
+//router.get('/canvas', partieActionFile.getCanvas);
 
-// router.post('/post',actionsImages.addImageAction);
-// router.delete('/delete/:id/:key',actionsImages.deleteImageAction);
+//router.put('/canvas/:id',partieActionFile.putCanvas);
 
-// router.post('/like', actionsImages.likeAction);
-// router.get('/showalllike/:idImage', actionsImages.showAllLikeAction);
+router.post('/canvas',partieActionFile.postCanvas);
 
-//router.put('/update/:id',actionsImages.updateImageAction);
 
 module.exports = router;

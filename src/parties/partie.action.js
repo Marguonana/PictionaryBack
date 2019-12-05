@@ -33,6 +33,25 @@ module.exports={
             .then((infosJoueur)=>{res.status(200).send({data : "Le joueur "+infosJoueur.pseudo+ " a été ajouté à la partie "+infosJoueur.theme})})
             .catch((err)=>{res.status(500).send({msg:'Error while adding',details : err})});
         }
+    },
+    getCanvas: (req,res) => {
+        let targetCanvas = req.query.theme;
+        if (!targetCanvas){
+            res.status(400).send({error : "Requête null" })
+        }
+        partieProcessFile.getCanvasProcess(targetCanvas)
+        .then((canvas) => {res.status(200).send({data : canvas})})
+        .catch((err) => {res.status(500).send({error: 'Aucun canvas trouvé', details: err})})
+    },
+    postCanvas: (req,res) => {
+        let targetCanvas = req.query.canvas;
+        let targetTheme = req.query.theme;
+        if (!targetCanvas){
+            res.status(400).send({error : "Requête null" })
+        }
+        partieProcessFile.postCanvasProcess(targetCanvas, targetTheme)
+        .then(() => {res.status(200)})
+        .catch((err) => {res.status(500).send({error: 'Echec de la sauvegarde', details: err})})
     }
 
 

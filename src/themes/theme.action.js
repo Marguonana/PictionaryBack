@@ -12,9 +12,9 @@ module.exports={
     /**
      * | route: /theme/words
      * | res: retourne la liste des mots dans data
-     * | req: req.param.theme contient le theme choisi
+     * | req: req.query.theme contient le theme choisi
      */
-    getWords:(req,res)=>{
+    getWords: (req,res) => {
         let targetTheme= req.query.theme;
         if (!targetTheme){
            return res.status(400);
@@ -22,7 +22,7 @@ module.exports={
             res.type('json');
             themeProcessFile.themeProcess(targetTheme)
             .then((words)=> {res.status(200).send({data : words})})
-            .catch((err)=>{res.status(500).send({msg:'Error on db research',details : err})})
+            .catch((err)=>{res.status(500).send({error:'Error on db research',details : err})})
         }
     }
 }

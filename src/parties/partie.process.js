@@ -36,6 +36,12 @@ module.exports={
             colPartie.listeJoueurs.push({})
             colPartie.update({})
         })
+    },
+    postCanvasProcess: (canvas,theme) => {
+        return new Promise((resolve,reject)=> {
+            console.log(canvas);
+            resolve();
+        })
     }
 }
 

@@ -1,6 +1,7 @@
 /**
  * ----------------------------------------------
- * | MODEL : Fichier contenant le model de notre base de donnée 
+ * | MODEL : Fichier contenant le model de la collection
+ * | Themes de notre base de donnée 
  * | 
  * -----------------------------------------------
  */
@@ -10,7 +11,7 @@ const ObjectId = require('mongodb').ObjectID;
 
 var ThemeSchema = new Schema (
     {
-        section: {type: String, required: true},
+        section: {type: String, required: true, uppercase: true},
         liste: []
     }
 );

@@ -9,12 +9,4 @@ router.use(bodyParser.json({limit: '100mb' , extended: true }));
 
 router.get('/words',themeActionFile.getWords);
 
-// router.post('/post',actionsImages.addImageAction);
-// router.delete('/delete/:id/:key',actionsImages.deleteImageAction);
-
-// router.post('/like', actionsImages.likeAction);
-// router.get('/showalllike/:idImage', actionsImages.showAllLikeAction);
-
-//router.put('/update/:id',actionsImages.updateImageAction);
-
 module.exports = router;
