@@ -22,9 +22,9 @@ module.exports={
                 }else{
                     collection.forEach((colElem)=>{
                         if (!colElem) reject('No data found');
-                        if (colElem.section.toLowerCase() === theme.toLowerCase()){
+                        if (colElem.section.toUpperCase() === theme.toUpperCase()){
                             console.log('GET WORDS: ',colElem.liste);
-                            resolve(JSON.stringify(colElem.liste));
+                            resolve(colElem.liste);
                         }
                     })
                 }
