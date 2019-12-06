@@ -4,7 +4,6 @@
  * | Les test de base se feront ici
  * ------------------------------------------------
  */
-// const colImages  = require('./modelsImages');
 const themeProcessFile = require('./theme.process');
 
 module.exports={
