@@ -1,12 +1,18 @@
 const express = require('express');
 const bodyParser= require('body-parser')
 const router = express.Router();
-const themeActionFile = require('./theme.action');
+const partieActionFile = require('./partie.action');
 
 router.use(bodyParser.urlencoded({limit: '100mb' , extended: true }));
 router.use(bodyParser.json({limit: '100mb' , extended: true }));
 //------------------------------------------------------
 
-router.get('/words',themeActionFile.getWords);
+router.get('/',partieActionFile.getParties);
+//router.get('/canvas', partieActionFile.getCanvas);
+
+//router.put('/canvas/:id',partieActionFile.putCanvas);
+
+router.post('/canvas',partieActionFile.postCanvas);
+
 
 module.exports = router;
