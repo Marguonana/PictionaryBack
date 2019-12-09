@@ -34,6 +34,16 @@ module.exports={
         .then((ret) => {res.status(200).json(ret)})
         .catch((ret)=>{res.status(500).json(ret)})
         
+    },
+
+    rechercherParId:(req, res)=>{
+        if(!req.params.id){
+            res.status(400);
+        }else{
+            joueurProcessFile.rechercherParId(req.params.id)
+            .then((joueur)=>{res.status(200).send(joueur)})
+            .catch((err)=>{res.status(500).send(err)})
+        }
     }
 
 

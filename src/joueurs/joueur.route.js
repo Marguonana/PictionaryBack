@@ -15,4 +15,7 @@ router.get('/',joueurActionFile.rechercherUnCompte);
 router.post('/',joueurActionFile.creationDeCompte);
 
 
+router.get('/:id', joueurActionFile.rechercherParId);
+
+
 module.exports = router;

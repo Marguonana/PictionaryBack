@@ -35,6 +35,18 @@ module.exports={
                 }
             });
         })
+    },
+
+    rechercherParId:(id)=>{
+        return new Promise((resolve, reject)=>{
+            colJoueur.find({_id:id}, (err, joueur)=>{
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(joueur);
+                }
+            })
+        })
     }
 }
 
