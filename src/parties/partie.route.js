@@ -9,6 +9,8 @@ router.use(bodyParser.json({limit: '100mb' , extended: true }));
 
 router.get('/',partieActionFile.getParties);
 //router.get('/canvas', partieActionFile.getCanvas);
+router.get('/parties', partieActionFile.getParties);
+router.get('/nbJoueurs', partieActionFile.getNbJoueurs);
 
 //router.put('/canvas/:id',partieActionFile.putCanvas);
 
