@@ -24,6 +24,16 @@ module.exports={
             .catch((err)=>{res.status(500).send({msg:'Error on db research',details : err})})
         }
     },
+
+    getNbJoueurs:(req, res)=>{
+        partieProcessFile.getNbJoueursDesThemes()
+        .then((NbJoueursDansThemes)=>{ res.status(200).send({nbJoueurs:NbJoueursDansThemes})})
+        .catch((err)=>{
+            res.status(500).send({msg:'Error on db research',details : err});
+        })
+    },
+
+
     joinAction:(req, res)=>{
         if(!req.query.id || !req.query.pseudo || !req.query.theme){
             return res.status(400);
@@ -51,6 +61,4 @@ module.exports={
         .then(() => {res.status(200)})
         .catch((err) => {res.status(500).send({error: 'Echec de la sauvegarde', details: err})})
     }
-
-
 }

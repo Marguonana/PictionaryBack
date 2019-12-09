@@ -1,16 +1,40 @@
 /**
  * ---------------------------------
- * | PROCESS : 
+ * | PROCESS :
  * |
  * ---------------------------------
  */
-const colPartie = require('./partie.model');
-const mongoose= require('mongoose')
-mongoose.Promise=global.Promise
+const colPartie = require("./partie.model");
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
 
+module.exports = {
 
-
-module.exports={
+  getNbJoueursDesThemes: () => {
+    return new Promise((resolve, reject) => {
+      colPartie.find({}, (err, collection) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          if (!collection) {
+            reject("Aucune liste de thèmes trouvée");
+          }
+          collection.forEach(colElem => {
+            if (!colElem) {
+              reject("No data found");
+            } else {
+              res.push({
+                theme: colElem.section,
+                joueurs: colElem.listeJoueurs
+              });
+              resolve(res);
+            }
+          });
+        }
+      });
+    });
+  },
 
     
     partieProcess:(partie)=>{
@@ -29,14 +53,9 @@ module.exports={
                     })
                 }
             });
-        })
+        });
     },
-    updatePartie: (joueur)=>{
-        return new Promise((resolve, reject)=>{
-            colPartie.listeJoueurs.push({})
-            colPartie.update({})
-        })
-    },
+    
     postCanvasProcess: (theme,canvas) => {
         console.log(theme)
         return new Promise((resolve,reject)=> {
@@ -46,7 +65,19 @@ module.exports={
                 doc.save();
                 resolve();
               });
-        })
-    }
-}
+        });
+    },
 
+
+  updatePartie: (data) => {
+    return new Promise((resolve, reject) => {
+      let partieApresAjout = colPartie.update(
+        { section: data.section },
+        { $push: { listeJoueurs: { pseudo: data.pseudo, score: data.score } } }
+      );
+      res.push(partieApresAjout);
+      resolve(res);
+    })
+  }
+  
+};
