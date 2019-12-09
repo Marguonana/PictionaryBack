@@ -11,6 +11,7 @@ router.get('/',partieActionFile.getParties);
 //router.get('/canvas', partieActionFile.getCanvas);
 router.get('/parties', partieActionFile.getParties);
 router.get('/nbJoueurs', partieActionFile.getNbJoueurs);
+router.put('/partie/:id', partieActionFile.rejoindrePartie)
 
 //router.put('/canvas/:id',partieActionFile.putCanvas);
 

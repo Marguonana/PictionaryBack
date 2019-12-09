@@ -41,7 +41,7 @@ module.exports={
         return new Promise((resolve, reject)=>{
             colJoueur.find({_id:id}, (err, joueur)=>{
                 if(err){
-                    reject(err);
+                    resolve("Aucun joueur trouvé");
                 }else{
                     resolve(joueur);
                 }
