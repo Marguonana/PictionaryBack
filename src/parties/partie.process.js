@@ -9,7 +9,6 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 module.exports = {
-
   getNbJoueursDesThemes: () => {
     return new Promise((resolve, reject) => {
       colPartie.find({}, (err, collection) => {
@@ -36,48 +35,58 @@ module.exports = {
     });
   },
 
-    
-    partieProcess:(partie)=>{
-        return new Promise((resolve,reject)=>{
-            colPartie.find({}, (err, collection)=> {
-                if(err){
-                    console.log(err);
-                    reject(err);
-                }else{
-                    collection.forEach((colElem)=>{
-                        if (!colElem) reject('No data found');
-                        if (colElem.section.toUpperCase() === partie.toUpperCase()){
-                            console.log('GET parties: ', colElem.liste);
-                            resolve(JSON.stringify(colElem.liste));
-                        }
-                    })
-                }
-            });
-        });
-    },
-    
-    postCanvasProcess: (theme,canvas) => {
-        console.log(theme)
-        return new Promise((resolve,reject)=> {
-            colPartie.findOne({ section: theme }, function (err, doc){
-                console.log(doc)
-                doc.canvas = canvas;
-                doc.save();
-                resolve();
-              });
-        });
-    },
-
-
-  updatePartie: (data) => {
+  partieProcess: partie => {
     return new Promise((resolve, reject) => {
-      let partieApresAjout = colPartie.update(
-        { section: data.section },
-        { $push: { listeJoueurs: { pseudo: data.pseudo, score: data.score } } }
+      colPartie.find({}, (err, collection) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          collection.forEach(colElem => {
+            if (!colElem) reject("No data found");
+            if (colElem.section.toUpperCase() === partie.toUpperCase()) {
+              console.log("GET parties: ", colElem.liste);
+              resolve(JSON.stringify(colElem.liste));
+            }
+          });
+        }
+      });
+    });
+  },
+
+  postCanvasProcess: (theme, canvas) => {
+    console.log(theme);
+    return new Promise((resolve, reject) => {
+      colPartie.findOne({ section: theme }, function(err, doc) {
+        console.log(doc);
+        doc.canvas = canvas;
+        doc.save();
+        resolve();
+      });
+    });
+  },
+
+  rejoindrePartie: data => {
+    return new Promise((resolve, reject) => {
+      colPartie.findOneAndUpdate(
+        { _id: data.idPartie },
+        {
+          $push: {
+            listeJoueurs: {
+              _id: data.idJoeur,
+              pseudo: data.pseudo,
+              score: data.score
+            }
+          }
+        },
+        (err, doc) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(doc);
+          }
+        }
       );
-      res.push(partieApresAjout);
-      resolve(res);
-    })
+    });
   }
-  
 };
