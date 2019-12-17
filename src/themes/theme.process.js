@@ -30,6 +30,19 @@ module.exports={
                 }
             });
         })
+    },
+
+
+    getAllThemes:()=>{
+        return new Promise((resolve, reject)=>{
+            colTheme.find({}, (err, collection)=>{
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(collection);
+                }
+            })
+        })
     }
 }
 

@@ -4,7 +4,6 @@
  * | Les test de base se feront ici
  * ------------------------------------------------
  */
-// const colImages  = require('./modelsImages');
 const themeProcessFile = require('./theme.process');
 
 module.exports={
@@ -24,5 +23,11 @@ module.exports={
             .then((words)=> {res.status(200).send({data : words})})
             .catch((err)=>{res.status(500).send({error:'Error on db research',details : err})})
         }
+    },
+
+    getAllThemes:(req, res)=>{
+        themeProcessFile.getAllThemes()
+        .then((themes)=>{res.status(200).send({themes : themes})})
+        .catch((err)=>{res.status(500).send({msg:'Erreur process tous themes',details : err})})
     }
 }

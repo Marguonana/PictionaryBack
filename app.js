@@ -5,6 +5,7 @@ const port = 3000;
 // const routesUsers = require('./src/compUsers/routesUsers');
 const routeTheme = require('./src/themes/theme.route');
 const routePartie = require('./src/parties/partie.route')
+const routeJoueur = require('./src/joueurs/joueur.route')
 const dataBase = require('./dataBase');
 
 app.use(cors({
@@ -14,6 +15,7 @@ app.use(cors({
 // Images call-----------------------------------------------------------
 app.use('/theme',routeTheme)
 app.use('/partie',routePartie)
+app.use('/joueur',routeJoueur)
 
 /**
  * Toutes les autres routes tomberont ici :)
