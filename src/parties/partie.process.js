@@ -66,15 +66,15 @@ module.exports = {
     });
   },
 
-  rejoindrePartie: data => {
+  rejoindrePartie: (data) => {
     return new Promise((resolve, reject) => {
       colPartie.findOneAndUpdate(
-        { _id: data.idPartie },
+        { _id: ObjectId(data.idPartie) },
         {
           $push: {
             listeJoueurs: {
-              _id: data.idJoeur,
-              pseudo: data.pseudo,
+              _id: data.idJoueur,
+              username: data.username,
               score: data.score
             }
           }

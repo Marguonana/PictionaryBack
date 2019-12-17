@@ -70,7 +70,7 @@ module.exports = {
           });
         })
         .catch(err => {
-          res.status(500).send({ msg: "Error while adding", details: err });
+          res.status(500).send({ msg: "Erreur maj partie", details: err });
         });
     }
   },
