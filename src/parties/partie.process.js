@@ -66,16 +66,22 @@ module.exports = {
     });
   },
 
-  rejoindrePartie: (data) => {
+  rejoindrePartie: data => {
+    console.log(
+      "entrée process | " +
+        data.idPartie +
+        " | " +
+        data.infosJoueur.id +
+        " | " +
+        data.infosJoueur.username
+    );
     return new Promise((resolve, reject) => {
       colPartie.findOneAndUpdate(
-        { _id: ObjectId(data.idPartie) },
+        { _id: data.idPartie },
         {
           $push: {
             listeJoueurs: {
-              _id: data.idJoueur,
-              username: data.username,
-              score: data.score
+              nom: data.infosJoueur.username
             }
           }
         },

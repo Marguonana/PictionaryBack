@@ -41,22 +41,26 @@ module.exports = {
   },
 
   rejoindrePartie: (req, res) => {
+    console.log(
+      req.body.idPartie +
+        " | " +
+        req.body.infosJoueur.id +
+        " | " +
+        req.body.infosJoueur.pseudo
+    );
     if (
-      !req.query.idPartie ||
-      !req.query.idJoueur ||
-      !req.query.pseudo ||
-      !req.query.theme
+      !req.body.idPartie ||
+      !req.body.infosJoueur.id ||
+      !req.body.infosJoueur.pseudo
     ) {
       return res.status(400);
     } else {
       let data = {
         infosJoueur: {
-          id: req.params.idJoueur,
-          username: req.params.username,
-          score: req.params.score,
-          mail: req.params.mail
+          id: req.body.infosJoueur.id,
+          username: req.body.infosJoueur.pseudo
         },
-        idPartie: req.query.idPartie
+        idPartie: req.body.idPartie
       };
       partieProcessFile
         .rejoindrePartie(data)
@@ -70,7 +74,9 @@ module.exports = {
           });
         })
         .catch(err => {
-          res.status(500).send({ msg: "Erreur maj partie", details: err });
+          res
+            .status(500)
+            .send({ msg: "Erreur maj partie", details: err.details });
         });
     }
   },
