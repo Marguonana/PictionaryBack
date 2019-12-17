@@ -102,7 +102,7 @@ module.exports = {
   },
   mettreAJourCanvas: (req, res) => {
     if (!req.body.canvas || !req.params.id) {
-      res.status(400).send({ error: "Paramètre manquant" });
+      res.status(400).send("Paramètre manquant");
     } else {
       partieProcessFile
         .mettreAJourCanvas(req.body.canvas, req.params.id)
@@ -113,6 +113,21 @@ module.exports = {
           res
             .status(500)
             .send({ msg: "Echec maj canvas", details: err.details });
+        });
+    }
+  },
+
+  getMotATrouver: (req, res) => {
+    if (!req.params.id) {
+      res.status(400).send("Erreur ID");
+    } else {
+      partieProcessFile
+        .getMotATrouver(req.params.id)
+        .then(motATrouver => {
+          res.status(200).send(motATrouver);
+        })
+        .catch(err => {
+          res.status(500).send({ erreur: err });
         });
     }
   }

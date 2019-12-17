@@ -92,7 +92,6 @@ module.exports = {
 
   //cette fonction ne fonctionne pas, le canvas n'est pas mis à jour en base
   mettreAJourCanvas: (canvas, idPartie) => {
-    console.log(idPartie)
     return new Promise((resolve, reject) => {
       colPartie.findByIdAndUpdate(
         {
@@ -109,5 +108,17 @@ module.exports = {
         }
       );
     });
+  },
+
+  getMotATrouver: (idPartie)=>{
+    return new Promise((resolve, reject)=>{
+      colPartie.findById({_id : idPartie}, (err, res)=>{
+        if(err){
+          reject(err);
+        }else{
+          resolve(res.motATrouver);
+        }
+      })
+    })
   }
 };
