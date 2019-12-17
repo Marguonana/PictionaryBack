@@ -7,15 +7,10 @@ router.use(bodyParser.urlencoded({limit: '100mb' , extended: true }));
 router.use(bodyParser.json({limit: '100mb' , extended: true }));
 //------------------------------------------------------
 
-router.get('/',joueurActionFile.rechercherUnCompte);
-//router.get('/canvas', partieActionFile.getCanvas);
-
-//router.put('/canvas/:id',partieActionFile.putCanvas);
-
+//router.get('/',joueurActionFile.rechercherUnCompte);
 router.post('/',joueurActionFile.creationDeCompte);
-
-
-router.get('/:id', joueurActionFile.rechercherParId);
+router.get('/:id', joueurActionFile.getParId);
+router.get('/', joueurActionFile.getParIdentifiants);
 
 
 module.exports = router;

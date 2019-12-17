@@ -42,7 +42,7 @@ module.exports = {
 
   rejoindrePartie: (req, res) => {
     if (
-      !req.body.idPartie ||
+      !req.params.id ||
       !req.body.infosJoueur.id ||
       !req.body.infosJoueur.pseudo
     ) {
@@ -53,7 +53,7 @@ module.exports = {
           id: req.body.infosJoueur.id,
           username: req.body.infosJoueur.pseudo
         },
-        idPartie: req.body.idPartie
+        idPartie: req.params.id
       };
       partieProcessFile
         .rejoindrePartie(data)
