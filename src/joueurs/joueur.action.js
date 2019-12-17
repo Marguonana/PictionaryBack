@@ -13,11 +13,11 @@ module.exports = {
    * | req: req.query.email
    */
   getParIdentifiants: (req, res) => {
-    if (!req.body.pseudo || !req.body.mdp) {
+    if (!req.query.pseudo || !req.query.mdp) {
       res.status(400);
     } else {
       joueurProcessFile
-        .getParIdentifiants(req.body.pseudo, req.body.mdp)
+        .getParIdentifiants(req.query.pseudo, req.query.mdp)
         .then((joueur) => {
           res.status(200).send(joueur);
         })
