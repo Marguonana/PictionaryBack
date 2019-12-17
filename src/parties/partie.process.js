@@ -6,6 +6,7 @@
  */
 const colPartie = require("./partie.model");
 const mongoose = require("mongoose");
+const ObjectId = require("mongodb").ObjectID;
 mongoose.Promise = global.Promise;
 
 module.exports = {
@@ -67,21 +68,14 @@ module.exports = {
   },
 
   rejoindrePartie: data => {
-    console.log(
-      "entrée process | " +
-        data.idPartie +
-        " | " +
-        data.infosJoueur.id +
-        " | " +
-        data.infosJoueur.username
-    );
     return new Promise((resolve, reject) => {
-      colPartie.findOneAndUpdate(
+      colPartie.findByIdAndUpdate(
         { _id: data.idPartie },
         {
           $push: {
             listeJoueurs: {
-              nom: data.infosJoueur.username
+              nom: data.infosJoueur.username,
+              id: data.infosJoueur.id
             }
           }
         },
@@ -90,6 +84,27 @@ module.exports = {
             reject(err);
           } else {
             resolve(doc);
+          }
+        }
+      );
+    });
+  },
+
+  //cette fonction ne fonctionne pas, le canvas n'est pas mis à jour en base
+  mettreAJourCanvas: (canvas, idPartie) => {
+    console.log(idPartie)
+    return new Promise((resolve, reject) => {
+      colPartie.findByIdAndUpdate(
+        {
+          _id: idPartie
+        },
+        {
+          canvas: canvas
+        }, (err, res)=>{
+          if(err){
+            reject(err);
+          }else{
+            resolve(res);
           }
         }
       );

@@ -41,13 +41,6 @@ module.exports = {
   },
 
   rejoindrePartie: (req, res) => {
-    console.log(
-      req.body.idPartie +
-        " | " +
-        req.body.infosJoueur.id +
-        " | " +
-        req.body.infosJoueur.pseudo
-    );
     if (
       !req.body.idPartie ||
       !req.body.infosJoueur.id ||
@@ -106,5 +99,21 @@ module.exports = {
       .catch(err => {
         res.status(500).send({ error: "Echec de la sauvegarde", details: err });
       });
+  },
+  mettreAJourCanvas: (req, res) => {
+    if (!req.body.canvas || !req.params.id) {
+      res.status(400).send({ error: "Paramètre manquant" });
+    } else {
+      partieProcessFile
+        .mettreAJourCanvas(req.body.canvas, req.params.id)
+        .then(() => {
+          res.status(200).send("Canvas mis à jour");
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .send({ msg: "Echec maj canvas", details: err.details });
+        });
+    }
   }
 };
