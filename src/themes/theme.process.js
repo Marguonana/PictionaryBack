@@ -23,8 +23,8 @@ module.exports={
                     collection.forEach((colElem)=>{
                         if (!colElem) reject('No data found');
                         if (colElem.section.toUpperCase() === theme.toUpperCase()){
-                            console.log('GET WORDS: ',colElem.liste);
-                            resolve(colElem.liste);
+                            console.log('GET WORDS: ', colElem.liste);
+                            resolve({id: colElem._id, words: colElem.liste});
                         }
                     })
                 }

@@ -20,7 +20,7 @@ module.exports={
         }else{
             res.type('json');
             themeProcessFile.themeProcess(targetTheme)
-            .then((words)=> {res.status(200).send({data : words})})
+            .then((resultat)=> {res.status(200).send(resultat)})
             .catch((err)=>{res.status(500).send({error:'Error on db research',details : err})})
         }
     },
