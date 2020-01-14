@@ -61,7 +61,7 @@ module.exports = {
 
   supprimerCompte: id => {
     return new Promise((resolve, reject) => {
-      colJoueur.findByIdAndRemove({ id }, (err, res) => {
+      colJoueur.findByIdAndRemove({ _id: id }, (err, res) => {
         if (err) {
           reject(err);
         } else {
