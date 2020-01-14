@@ -20,7 +20,7 @@ module.exports = {
       joueurProcessFile
         .postParLogin(req.body.pseudo, req.body.mdp)
         .then(joueur => {
-          res.status(200).send(joueur);
+          res.status(200).send(joueur[0]);
         })
         .catch(err => res.status(500).send(err));
     }

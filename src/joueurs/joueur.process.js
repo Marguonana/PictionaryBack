@@ -51,7 +51,7 @@ module.exports = {
         if (err) {
           reject(err);
         } else if (res === null) {
-          reject("Compte inexistant.");
+          reject({err:"Compte inexistant."});
         } else {
           resolve(res);
         }
