@@ -14,7 +14,12 @@ router.get('/nbJoueurs', partieActionFile.getNbJoueurs);
 router.get('/:id/motATrouver', partieActionFile.getMotATrouver);
 router.put('/:id/joueurs', partieActionFile.rejoindrePartie);
 router.put('/:id/canvas',partieActionFile.mettreAJourCanvas);
+router.get('/:id/canvas',partieActionFile.getCanvas);
+router.get('/words',partieActionFile.getWords);
+router.get('/:id/messages', partieActionFile.getMessages);
 
+//test
+router.get('/themes', partieActionFile.getAllThemes);
 //router.post('/canvas',partieActionFile.postCanvas);
 
 
