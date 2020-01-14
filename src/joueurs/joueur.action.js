@@ -13,15 +13,15 @@ module.exports = {
    * | req: req.query.email
    */
   getParIdentifiants: (req, res) => {
-    if (!req.query.pseudo || !req.query.mdp) {
+    if (!req.query.email || !req.query.mdp) {
       res.status(400);
     } else {
       joueurProcessFile
-        .getParIdentifiants(req.query.pseudo, req.query.mdp)
-        .then((joueur) => {
+        .getParIdentifiants(req.query.email, req.query.mdp)
+        .then(joueur => {
           res.status(200).send(joueur);
         })
-        .catch((err)=>res.status(500).send(err));
+        .catch(err => res.status(500).send(err));
     }
   },
 
@@ -57,6 +57,17 @@ module.exports = {
         .catch(err => {
           res.status(500).send(err);
         });
+    }
+  },
+
+  supprimerCompte: (req, res) => {
+    if (!req.params.id) {
+      res.status(400);
+    } else {
+      joueurProcessFile
+        .supprimerCompte(req.params.id)
+        .then(() => res.status(200).send("ok"))
+        .catch(res.status.send(500).send(err))
     }
   }
 };

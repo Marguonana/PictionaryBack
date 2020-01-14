@@ -45,9 +45,23 @@ module.exports = {
     });
   },
 
-  getParIdentifiants: (pseudo, mdp) => {
+  getParIdentifiants: (email, mdp) => {
     return new Promise((resolve, reject) => {
-      colJoueur.findOne({ username: pseudo, password: mdp }, (err, res) => {
+      colJoueur.findOne({ email: email, password: mdp }, (err, res) => {
+        if (err) {
+          reject(err);
+        } else if (res == null) {
+          reject("Compte inexistant.");
+        } else {
+          resolve(res);
+        }
+      });
+    });
+  },
+
+  supprimerCompte: id => {
+    return new Promise((resolve, reject) => {
+      colJoueur.findByIdAndRemove({ id }, (err, res) => {
         if (err) {
           reject(err);
         } else {

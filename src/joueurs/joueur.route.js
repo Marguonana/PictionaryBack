@@ -11,6 +11,6 @@ router.use(bodyParser.json({limit: '100mb' , extended: true }));
 router.post('/',joueurActionFile.creationDeCompte);
 router.get('/:id', joueurActionFile.getParId);
 router.get('/', joueurActionFile.getParIdentifiants);
-
+router.delete('/:id', joueurActionFile.supprimerCompte);
 
 module.exports = router;
