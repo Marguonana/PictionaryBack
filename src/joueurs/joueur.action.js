@@ -66,8 +66,8 @@ module.exports = {
     } else {
       joueurProcessFile
         .supprimerCompte(req.params.id)
-        .then(() => res.status(200).send("ok"))
-        .catch(res.status.send(500).send(err));
+        .then((res) => res.status(200).send({res:"ok"}))
+        .catch((err) => res.status(500).send(err));
     }
   }
 };
