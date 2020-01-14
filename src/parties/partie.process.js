@@ -91,7 +91,7 @@ module.exports = {
   },
 
   //cette fonction ne fonctionne pas, le canvas n'est pas mis à jour en base
-  mettreAJourCanvas: (canvas, idPartie) => {  
+  mettreAJourCanvas: (canvas, idPartie) => {
     return new Promise((resolve, reject) => {
       colPartie.findByIdAndUpdate(
         {
@@ -157,6 +157,18 @@ module.exports = {
             }
           });
           resolve(themes);
+        }
+      });
+    });
+  },
+
+  getCanvas: idPartie => {
+    return new Promise((resolve, reject) => {
+      colPartie.findById({ _id: idPartie }, (err, partie) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(partie.canvas);
         }
       });
     });

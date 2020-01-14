@@ -165,5 +165,18 @@ module.exports = {
           .status(500)
           .send({ msg: "Erreur process tous themes", details: err });
       });
+  },
+
+  getCanvas: (req, res) => {
+    partieProcessFile
+      .getCanvas(req.params.id)
+      .then(canvas => {
+        res.status(200).send(canvas);
+      })
+      .catch(err => {
+        res
+          .statuss(500)
+          .send({ msg: "Erreur process tous themes", details: err });
+      });
   }
 };
