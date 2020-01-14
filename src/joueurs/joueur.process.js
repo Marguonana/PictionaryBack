@@ -45,12 +45,12 @@ module.exports = {
     });
   },
 
-  getParIdentifiants: (pseudo, mdp) => {
+  postParLogin: (pseudo, mdp) => {
     return new Promise((resolve, reject) => {
-      colJoueur.findOne({ username: pseudo, password: mdp }, (err, res) => {
+      colJoueur.find({ username: pseudo, password: mdp }, (err, res) => {
         if (err) {
           reject(err);
-        } else if (res == null) {
+        } else if (res === null) {
           reject("Compte inexistant.");
         } else {
           resolve(res);
