@@ -6,7 +6,7 @@ const port = 3000;
 const routeTheme = require('./src/themes/theme.route');
 const routePartie = require('./src/parties/partie.route')
 const routeJoueur = require('./src/joueurs/joueur.route')
-const dataBase = require('./dataBase');
+const dataBase = require('./database');
 
 app.use(cors({
   origin: 'http://localhost:4200'
