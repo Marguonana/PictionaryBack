@@ -14,7 +14,8 @@ var PartieSchema = new Schema({
   numPartie: Number,
   motATrouver: String,
   messages: Array,
-  reponses: Array
+  reponses: Array,
+  image: String
 });
 
 PartieSchema.set("collection", "Parties");
