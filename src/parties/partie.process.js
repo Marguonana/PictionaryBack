@@ -172,5 +172,17 @@ module.exports = {
         }
       });
     });
+  },
+
+  getMessages: idPartie => {
+    return new Promise((resolve, reject) => {
+      colPartie.findById({ _id: idPartie }, (err, partie) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(partie.messages);
+        }
+      });
+    });
   }
 };

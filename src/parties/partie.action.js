@@ -175,8 +175,19 @@ module.exports = {
       })
       .catch(err => {
         res
-          .statuss(500)
+          .status(500)
           .send({ msg: "Erreur process tous themes", details: err });
+      });
+  },
+
+  getMessages: (req, res) => {
+    partieProcessFile
+      .getMessages(req.params.id)
+      .then(messages => {
+        res.status(200).send(messages);
+      })
+      .catch(err => {
+        res.status(500).send(err);
       });
   }
 };
