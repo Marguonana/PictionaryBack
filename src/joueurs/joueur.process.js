@@ -47,7 +47,7 @@ module.exports = {
 
   getParIdentifiants: (pseudo, mdp) => {
     return new Promise((resolve, reject) => {
-      colJoueur.findOne({ pseudo: pseudo, password: mdp }, (err, res) => {
+      colJoueur.findOne({ username: pseudo, password: mdp }, (err, res) => {
         if (err) {
           reject(err);
         } else if (res == null) {
