@@ -99,10 +99,11 @@ module.exports = {
         },
         {
           canvas: canvas
-        }, (err, res)=>{
-          if(err){
+        },
+        (err, res) => {
+          if (err) {
             reject(err);
-          }else{
+          } else {
             resolve(res);
           }
         }
@@ -110,15 +111,54 @@ module.exports = {
     });
   },
 
-  getMotATrouver: (idPartie)=>{
-    return new Promise((resolve, reject)=>{
-      colPartie.findById({_id : idPartie}, (err, res)=>{
-        if(err){
+  getMotATrouver: idPartie => {
+    return new Promise((resolve, reject) => {
+      colPartie.findById({ _id: idPartie }, (err, res) => {
+        if (err) {
           reject(err);
-        }else{
+        } else {
           resolve(res.motATrouver);
         }
-      })
-    })
+      });
+    });
+  },
+
+  themeProcess: theme => {
+    return new Promise((resolve, reject) => {
+      colPartie.find({}, (err, collection) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          collection.forEach(colElem => {
+            if (!colElem) reject("No data found");
+            if (colElem.section.toUpperCase() === theme.toUpperCase()) {
+              console.log("GET WORDS: ", colElem.liste);
+              resolve({ id: colElem._id, words: colElem.liste });
+            }
+          });
+        }
+      });
+    });
+  },
+
+  getAllThemes: () => {
+    return new Promise((resolve, reject) => {
+      let themes = [];
+      colPartie.find({}, (err, collection) => {
+        if (err) {
+          reject(err);
+        } else {
+          collection.forEach(colElem => {
+            if (!colElem) {
+              reject("No data found");
+            } else {
+              themes.push({ theme: colElem.section, id: colElem._id });
+            }
+          });
+          resolve(themes);
+        }
+      });
+    });
   }
 };

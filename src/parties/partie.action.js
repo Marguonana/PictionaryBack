@@ -130,5 +130,40 @@ module.exports = {
           res.status(500).send({ erreur: err });
         });
     }
+  },
+
+  /**
+   * | route: /theme/words
+   * | res: retourne la liste des mots dans data
+   * | req: req.query.theme contient le theme choisi
+   */
+  getWords: (req, res) => {
+    let targetTheme = req.query.theme;
+    if (!targetTheme) {
+      return res.status(400);
+    } else {
+      res.type("json");
+      partieProcessFile
+        .themeProcess(targetTheme)
+        .then(resultat => {
+          res.status(200).send(resultat);
+        })
+        .catch(err => {
+          res.status(500).send({ error: "Error on db research", details: err });
+        });
+    }
+  },
+
+  getAllThemes: (req, res) => {
+    partieProcessFile
+      .getAllThemes()
+      .then(themes => {
+        res.status(200).send(themes);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send({ msg: "Erreur process tous themes", details: err });
+      });
   }
 };
