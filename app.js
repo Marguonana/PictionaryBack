@@ -1,12 +1,17 @@
 const express = require('express');
 var cors = require('cors');
 const app = express();
-const port = 3000;
+//const port = 3000;
 // const routesUsers = require('./src/compUsers/routesUsers');
 const routeTheme = require('./src/themes/theme.route');
 const routePartie = require('./src/parties/partie.route')
 const routeJoueur = require('./src/joueurs/joueur.route')
 const dataBase = require('./database');
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
 app.use(cors({
   origin: 'http://localhost:4200'
