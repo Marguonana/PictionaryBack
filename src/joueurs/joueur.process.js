@@ -45,9 +45,9 @@ module.exports = {
     });
   },
 
-  getParIdentifiants: (email, mdp) => {
+  getParIdentifiants: (pseudo, mdp) => {
     return new Promise((resolve, reject) => {
-      colJoueur.findOne({ email: email, password: mdp }, (err, res) => {
+      colJoueur.findOne({ pseudo: pseudo, password: mdp }, (err, res) => {
         if (err) {
           reject(err);
         } else if (res == null) {

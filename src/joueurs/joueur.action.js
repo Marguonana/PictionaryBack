@@ -13,11 +13,11 @@ module.exports = {
    * | req: req.query.email
    */
   getParIdentifiants: (req, res) => {
-    if (!req.query.email || !req.query.mdp) {
+    if (!req.query.pseudo || !req.query.mdp) {
       res.status(400);
     } else {
       joueurProcessFile
-        .getParIdentifiants(req.query.email, req.query.mdp)
+        .getParIdentifiants(req.query.pseudo, req.query.mdp)
         .then(joueur => {
           res.status(200).send(joueur);
         })
@@ -67,7 +67,7 @@ module.exports = {
       joueurProcessFile
         .supprimerCompte(req.params.id)
         .then(() => res.status(200).send("ok"))
-        .catch(res.status.send(500).send(err))
+        .catch(res.status.send(500).send(err));
     }
   }
 };
