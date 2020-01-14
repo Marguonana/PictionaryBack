@@ -91,11 +91,11 @@ module.exports = {
   },
 
   //cette fonction ne fonctionne pas, le canvas n'est pas mis à jour en base
-  mettreAJourCanvas: (canvas, idPartie) => {
+  mettreAJourCanvas: (canvas, idPartie) => {  
     return new Promise((resolve, reject) => {
       colPartie.findByIdAndUpdate(
         {
-          _id: idPartie
+          _id: ObjectId(idPartie)
         },
         {
           canvas: canvas
