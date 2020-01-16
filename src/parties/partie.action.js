@@ -195,5 +195,15 @@ module.exports = {
     .catch(err => {
       res.status(500).send({msg:'Echec de la deconnexion', details: err});
     })
+  },
+  getMessages: (req, res) => {
+    partieProcessFile
+      .getMessages(req.params.id)
+      .then(messages => {
+        res.status(200).send(messages);
+      })
+      .catch(err => {
+        res.status(500).send(err);
+      });
   }
 };
