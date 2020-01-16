@@ -123,7 +123,8 @@ module.exports = {
     });
   },
 
-  themeProcess: theme => {
+  themeProcess: (theme,id,pseudo) => {
+    console.log('theme : ', theme)
     return new Promise((resolve, reject) => {
       colPartie.find({}, (err, collection) => {
         if (err) {
@@ -132,9 +133,13 @@ module.exports = {
         } else {
           collection.forEach(colElem => {
             if (!colElem) reject("No data found");
-            if (colElem.section.toUpperCase() === theme.toUpperCase()) {
-              console.log("GET WORDS: ", colElem.liste);
-              resolve({ id: colElem._id, words: colElem.liste });
+            if (colElem.section === theme) {
+              console.log("GET WORDS: ", colElem.reponses);
+              // Enregistrement du joueur dans la partie
+              colElem.listeJoueurs.push( {id: id, username: pseudo})
+              colElem.save();
+              // connexionDuJoueur(theme, id, pseudo);
+              resolve({ id: colElem._id, words: colElem.reponses });
             }
           });
         }
@@ -153,7 +158,7 @@ module.exports = {
             if (!colElem) {
               reject("No data found");
             } else {
-              themes.push({ theme: colElem.section, id: colElem._id });
+              themes.push({ theme: colElem.section, id: colElem._id, image: colElem.image });
             }
           });
           resolve(themes);
@@ -169,6 +174,34 @@ module.exports = {
           reject(err);
         } else {
           resolve(partie.canvas);
+        }
+      });
+    });
+  },
+
+  joueurEnLigne: idPartie => {
+    return new Promise((resolve, reject) => {
+      colPartie.findById({_id: idPartie}, (err, partie) => {
+        if (err){
+          reject(err);
+        } else {
+          console.log(partie.listeJoueurs)
+          resolve(partie.listeJoueurs);
+        }
+      });
+    })
+  },
+
+  deconnexion:(idPartie, idJoueur) => {
+    return new Promise((resolve, reject) => {
+      colPartie.findById({ _id: idPartie }, (err, partie) => {
+        if (err) {
+          reject(err);
+        } else {
+          partie.listeJoueurs = partie.listeJoueurs.filter(joueur => joueur.id != idJoueur);
+          console.log(partie.listeJoueurs);
+          partie.save();
+          resolve('deconnexion...');
         }
       });
     });

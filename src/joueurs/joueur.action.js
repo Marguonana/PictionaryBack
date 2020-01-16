@@ -13,14 +13,14 @@ module.exports = {
    * | req: req.query.email
    */
   postParLogin: (req, res) => {
-    console.log(req.body)
+    console.log('####### Connexion ' ,req.body)
     if (!req.body.pseudo || !req.body.mdp) {
       res.status(400);
     } else {
       joueurProcessFile
         .postParLogin(req.body.pseudo, req.body.mdp)
         .then(joueur => {
-          res.status(200).send(joueur[0]);
+          res.status(200).send(joueur);
         })
         .catch(err => res.status(500).send(err));
     }

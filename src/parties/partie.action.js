@@ -134,7 +134,7 @@ module.exports = {
 
   /**
    * | route: /theme/words
-   * | res: retourne la liste des mots dans data
+   * | res: retourne la liste des mots dans data & connecte le joueur
    * | req: req.query.theme contient le theme choisi
    */
   getWords: (req, res) => {
@@ -144,7 +144,7 @@ module.exports = {
     } else {
       res.type("json");
       partieProcessFile
-        .themeProcess(targetTheme)
+        .themeProcess(targetTheme, req.query.id, req.query.pseudo)
         .then(resultat => {
           res.status(200).send(resultat);
         })
@@ -175,8 +175,25 @@ module.exports = {
       })
       .catch(err => {
         res
-          .statuss(500)
+          .status(500)
           .send({ msg: "Erreur process tous themes", details: err });
       });
+  },
+
+  joueurEnLigne: (req, res) => {
+    if(!req.params.id){ return res.status(400).send('Error request')}
+    partieProcessFile.joueurEnLigne(req.params.id)
+    .then(joueurs => res.status(200).send(joueurs))
+    .catch(err => res.status(500).send("Erreur liste joueur"))
+  },
+
+  deconnexion: (req, res) => {
+    partieProcessFile.deconnexion(req.body.idPartie, req.body.idJoueur)
+    .then(log => {
+      res.status(200).send(log);
+    })
+    .catch(err => {
+      res.status(500).send({msg:'Echec de la deconnexion', details: err});
+    })
   }
 };

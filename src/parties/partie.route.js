@@ -11,11 +11,13 @@ router.get('/',partieActionFile.getParties);
 //router.get('/canvas', partieActionFile.getCanvas);
 router.get('/parties', partieActionFile.getParties);
 router.get('/nbJoueurs', partieActionFile.getNbJoueurs);
+router.get('/:id/actifs', partieActionFile.joueurEnLigne);
 router.get('/:id/motATrouver', partieActionFile.getMotATrouver);
 router.put('/:id/joueurs', partieActionFile.rejoindrePartie);
 router.put('/:id/canvas',partieActionFile.mettreAJourCanvas);
 router.get('/:id/canvas',partieActionFile.getCanvas);
 router.get('/words',partieActionFile.getWords);
+router.post('/deconnexion', partieActionFile.deconnexion)
 
 //test
 router.get('/themes', partieActionFile.getAllThemes);
