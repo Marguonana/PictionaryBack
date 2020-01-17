@@ -8,16 +8,17 @@ const joueurProcessFile = require("./joueur.process");
 
 module.exports = {
   /**_____________________
-   * | route: /joueur en GET
+   * | route: /joueur/user en POST
    * | res:
    * | req: req.query.email
    */
-  getParIdentifiants: (req, res) => {
-    if (!req.query.pseudo || !req.query.mdp) {
+  postParLogin: (req, res) => {
+    console.log('####### Connexion ' ,req.body)
+    if (!req.body.pseudo || !req.body.mdp) {
       res.status(400);
     } else {
       joueurProcessFile
-        .getParIdentifiants(req.query.pseudo, req.query.mdp)
+        .postParLogin(req.body.pseudo, req.body.mdp)
         .then(joueur => {
           res.status(200).send(joueur);
         })

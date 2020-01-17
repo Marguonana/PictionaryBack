@@ -45,15 +45,18 @@ module.exports = {
     });
   },
 
-  getParIdentifiants: (pseudo, mdp) => {
+  postParLogin: (pseudo, mdp) => {
     return new Promise((resolve, reject) => {
-      colJoueur.findOne({ username: pseudo, password: mdp }, (err, res) => {
+      colJoueur.find({ username: pseudo, password: mdp }, (err, res) => {
+        
         if (err) {
           reject(err);
-        } else if (res == null) {
-          reject("Compte inexistant.");
+        } else if (res === null || !res[0]) {
+          reject({err:"Compte inexistant."});
         } else {
-          resolve(res);
+          var user = {username: res[0].username, _id: res[0]._id, score: res[0].score, email: res[0].email};
+          console.log('resultat login ' ,user)
+          resolve(user);
         }
       });
     });
@@ -61,6 +64,7 @@ module.exports = {
 
   supprimerCompte: id => {
     return new Promise((resolve, reject) => {
+      console.log(id);
       colJoueur.findByIdAndRemove({ _id: id }, (err, res) => {
         if (err) {
           reject(err);
