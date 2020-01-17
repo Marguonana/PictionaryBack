@@ -56,10 +56,10 @@ module.exports = {
   },
 
   postCanvasProcess: (theme, canvas) => {
-    console.log(theme);
+    // console.log(theme);
     return new Promise((resolve, reject) => {
       colPartie.findOne({ section: theme }, function(err, doc) {
-        console.log(doc);
+        // console.log(doc);
         doc.canvas = canvas;
         doc.save();
         resolve();
@@ -124,7 +124,7 @@ module.exports = {
   },
 
   themeProcess: (theme,id,pseudo) => {
-    console.log('theme : ', theme)
+    // console.log('theme : ', theme)
     return new Promise((resolve, reject) => {
       colPartie.find({}, (err, collection) => {
         if (err) {
@@ -191,13 +191,25 @@ module.exports = {
     });
   },
 
+  postMessage: (idPartie, message) => {
+    return new Promise((resolve, reject) => {
+      colPartie.findById({ _id: idPartie }, function(err, partie) {
+        if (err) reject(err);
+        console.log(partie.messages);
+        partie.messages.push(message);
+        partie.save();
+        resolve();
+      });
+    });
+  },
+
   joueurEnLigne: idPartie => {
     return new Promise((resolve, reject) => {
       colPartie.findById({_id: idPartie}, (err, partie) => {
         if (err){
           reject(err);
         } else {
-          console.log(partie.listeJoueurs)
+          // console.log(partie.listeJoueurs)
           resolve(partie.listeJoueurs);
         }
       });
@@ -211,7 +223,7 @@ module.exports = {
           reject(err);
         } else {
           partie.listeJoueurs = partie.listeJoueurs.filter(joueur => joueur.id != idJoueur);
-          console.log(partie.listeJoueurs);
+          // console.log(partie.listeJoueurs);
           partie.save();
           resolve('deconnexion...');
         }

@@ -196,6 +196,7 @@ module.exports = {
       res.status(500).send({msg:'Echec de la deconnexion', details: err});
     })
   },
+
   getMessages: (req, res) => {
     partieProcessFile
       .getMessages(req.params.id)
@@ -205,5 +206,20 @@ module.exports = {
       .catch(err => {
         res.status(500).send(err);
       });
+  },
+
+  postMessage: (req, res) => {
+    console.log(req.body.message, req.params.id)
+    if(!req.params.id || !req.body.message){
+      res.status(400).send('Requête invalide');
+    }
+    partieProcessFile
+    .postMessage(req.params.id, req.body.message)
+    .then(res => {
+      res.status(200);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
   }
 };
