@@ -209,7 +209,7 @@ module.exports = {
 
   posterMessage: (req, res) => {
     partieProcessFile
-      .posterMessage(req.body.idPartie, req.body.emetteur, req.body.message)
+      .posterMessage(req.params.id, req.body.emetteur, req.body.message)
       .then(() => res.status(200).send("message posté"))
       .catch(err => res.status(500).send(err));
   }

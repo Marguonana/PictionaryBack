@@ -198,15 +198,24 @@ module.exports = {
   posterMessage: (idPartie, emetteur, message) => {
     let m = {};
     return new Promise((resolve, reject) => {
-      colPartie.findById({ _id: idPartie }, (err, partie) => {
-        if (err) {
-          reject(err);
-        } else {
-          m = { emetteur: emetteur, message: message };
-          partie.messages.push(m);
-          resolve(partie);
+      colPartie.findByIdAndUpdate(
+        { _id: idPartie },
+        {
+          $push: {
+            messages: {
+              emetteur: emetteur,
+              message: message
+            }
+          }
+        },
+        (err, partie) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(partie);
+          }
         }
-      });
+      );
     });
   },
 
