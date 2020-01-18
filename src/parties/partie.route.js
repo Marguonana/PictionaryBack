@@ -17,7 +17,7 @@ router.put('/:id/canvas',partieActionFile.mettreAJourCanvas);
 router.get('/:id/canvas',partieActionFile.getCanvas);
 router.get('/words',partieActionFile.getWords);
 router.get('/:id/messages', partieActionFile.getMessages);
-
+router.put('/message', partieActionFile.posterMessage)
 //test
 router.get('/themes', partieActionFile.getAllThemes);
 //router.post('/canvas',partieActionFile.postCanvas);
