@@ -36,9 +36,12 @@ Code retour:
 
 POST
 Route: /joueur/user
+
 Paramètre : req.body.pseudo req.body.mdp
+
 Code retour:
 200 Le joueur est connecté à son compte
+
 400 Le joueur n'a pas pu se connecter
 500 Pas de contenus
 
