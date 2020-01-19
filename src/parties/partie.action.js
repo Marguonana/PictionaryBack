@@ -208,10 +208,18 @@ module.exports = {
       });
   },
 
-  posterMessage: (req, res) => {
+  postMessage: (req, res) => {
+    console.log(req.body.message, req.params.id)
+    if(!req.params.id || !req.body.message){
+      res.status(400).send('Requête invalide');
+    }
     partieProcessFile
-      .posterMessage(req.params.id, req.body.emetteur, req.body.message)
-      .then(() => res.status(200).send("message posté"))
-      .catch(err => res.status(500).send(err));
+    .postMessage(req.params.id, req.body.message)
+    .then(res => {
+      res.status(200);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
   }
 };

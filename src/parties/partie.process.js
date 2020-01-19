@@ -195,27 +195,15 @@ module.exports = {
     });
   },
 
-  posterMessage: (idPartie, emetteur, message) => {
-    let m = {};
+  postMessage: (idPartie, message) => {
     return new Promise((resolve, reject) => {
-      colPartie.findByIdAndUpdate(
-        { _id: idPartie },
-        {
-          $push: {
-            messages: {
-              emetteur: emetteur,
-              message: message
-            }
-          }
-        },
-        (err, partie) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(partie);
-          }
-        }
-      );
+      colPartie.findById({ _id: idPartie }, function(err, partie) {
+        if (err) reject(err);
+        console.log(partie.messages);
+        partie.messages.push(message);
+        partie.save();
+        resolve();
+      });
     });
   },
 

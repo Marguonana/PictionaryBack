@@ -19,7 +19,7 @@ router.get('/:id/canvas',partieActionFile.getCanvas);
 router.get('/words',partieActionFile.getWords);
 router.post('/deconnexion', partieActionFile.deconnexion);
 router.get('/:id/messages', partieActionFile.getMessages);
-router.put('/:id/message', partieActionFile.posterMessage)
+router.post('/:id/messages', partieActionFile.postMessage);
 //test
 router.get('/themes', partieActionFile.getAllThemes);
 //router.post('/canvas',partieActionFile.postCanvas);
