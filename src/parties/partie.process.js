@@ -123,8 +123,8 @@ module.exports = {
     });
   },
 
-  themeProcess: (theme,id,pseudo) => {
-    // console.log('theme : ', theme)
+  themeProcess: (theme, id, pseudo) => {
+    console.log("theme : ", theme);
     return new Promise((resolve, reject) => {
       colPartie.find({}, (err, collection) => {
         if (err) {
@@ -136,7 +136,7 @@ module.exports = {
             if (colElem.section === theme) {
               console.log("GET WORDS: ", colElem.reponses);
               // Enregistrement du joueur dans la partie
-              colElem.listeJoueurs.push( {id: id, username: pseudo})
+              colElem.listeJoueurs.push({ id: id, username: pseudo });
               colElem.save();
               // connexionDuJoueur(theme, id, pseudo);
               resolve({ id: colElem._id, words: colElem.reponses });
@@ -158,7 +158,11 @@ module.exports = {
             if (!colElem) {
               reject("No data found");
             } else {
-              themes.push({ theme: colElem.section, id: colElem._id, image: colElem.image });
+              themes.push({
+                theme: colElem.section,
+                id: colElem._id,
+                image: colElem.image
+              });
             }
           });
           resolve(themes);
@@ -205,30 +209,32 @@ module.exports = {
 
   joueurEnLigne: idPartie => {
     return new Promise((resolve, reject) => {
-      colPartie.findById({_id: idPartie}, (err, partie) => {
-        if (err){
+      colPartie.findById({ _id: idPartie }, (err, partie) => {
+        if (err) {
           reject(err);
         } else {
           // console.log(partie.listeJoueurs)
+          console.log(partie.listeJoueurs);
           resolve(partie.listeJoueurs);
         }
       });
-    })
+    });
   },
 
-  deconnexion:(idPartie, idJoueur) => {
+  deconnexion: (idPartie, idJoueur) => {
     return new Promise((resolve, reject) => {
       colPartie.findById({ _id: idPartie }, (err, partie) => {
         if (err) {
           reject(err);
         } else {
-          partie.listeJoueurs = partie.listeJoueurs.filter(joueur => joueur.id != idJoueur);
-          // console.log(partie.listeJoueurs);
+          partie.listeJoueurs = partie.listeJoueurs.filter(
+            joueur => joueur.id != idJoueur
+          );
+          console.log(partie.listeJoueurs);
           partie.save();
-          resolve('deconnexion...');
+          resolve("deconnexion...");
         }
-      })
-    })
+      });
+    });
   }
- 
 };
