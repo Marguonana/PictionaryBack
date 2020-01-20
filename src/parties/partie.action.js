@@ -124,7 +124,7 @@ module.exports = {
       partieProcessFile
         .getMotATrouver(req.params.id)
         .then(motATrouver => {
-          res.status(200).send(motATrouver);
+          res.status(200).send({motATrouver});
         })
         .catch(err => {
           res.status(500).send({ erreur: err });
