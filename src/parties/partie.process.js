@@ -124,7 +124,6 @@ module.exports = {
   },
 
   themeProcess: (theme, id, pseudo) => {
-    console.log("theme : ", theme);
     return new Promise((resolve, reject) => {
       colPartie.find({}, (err, collection) => {
         if (err) {
@@ -213,8 +212,6 @@ module.exports = {
         if (err) {
           reject(err);
         } else {
-          // console.log(partie.listeJoueurs)
-          console.log(partie.listeJoueurs);
           resolve(partie.listeJoueurs);
         }
       });
@@ -230,7 +227,7 @@ module.exports = {
           partie.listeJoueurs = partie.listeJoueurs.filter(
             joueur => joueur.id != idJoueur
           );
-          console.log(partie.listeJoueurs);
+          console.log(idJoueur, ' s est deconnecté')
           partie.save();
           resolve("deconnexion...");
         }

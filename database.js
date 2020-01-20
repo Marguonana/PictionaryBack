@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const mongoDB = "mongodb+srv://alex:alex@cluster0-gqsnd.mongodb.net/pictionary?retryWrites=true";
-const lnk = require('./src/themes/theme.action')
 
 module.exports={
     Connection:()=>{

@@ -73,20 +73,20 @@ module.exports = {
         });
     }
   },
-  getCanvas: (req, res) => {
-    let targetCanvas = req.query.theme;
-    if (!targetCanvas) {
-      res.status(400).send({ error: "Requête null" });
-    }
-    partieProcessFile
-      .getCanvasProcess(targetCanvas)
-      .then(canvas => {
-        res.status(200).send({ data: canvas });
-      })
-      .catch(err => {
-        res.status(500).send({ error: "Aucun canvas trouvé", details: err });
-      });
-  },
+  // getCanvas: (req, res) => {
+  //   let targetCanvas = req.query.theme;
+  //   if (!targetCanvas) {
+  //     res.status(400).send({ error: "Requête null" });
+  //   }
+  //   partieProcessFile
+  //     .getCanvasProcess(targetCanvas)
+  //     .then(canvas => {
+  //       res.status(200).send({ data: canvas });
+  //     })
+  //     .catch(err => {
+  //       res.status(500).send({ error: "Aucun canvas trouvé", details: err });
+  //     });
+  // },
   postCanvas: (req, res) => {
     if (!req.body.canvas || !req.body.theme) {
       res.status(400).send({ error: "Requête null" });
@@ -171,7 +171,7 @@ module.exports = {
     partieProcessFile
       .getCanvas(req.params.id)
       .then(canvas => {
-        res.status(200).send(canvas);
+        res.status(200).send({canvas});
       })
       .catch(err => {
         res
@@ -209,7 +209,6 @@ module.exports = {
   },
 
   postMessage: (req, res) => {
-    console.log(req.body.message, req.params.id)
     if(!req.params.id || !req.body.message){
       res.status(400).send('Requête invalide');
     }
